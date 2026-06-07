@@ -28,6 +28,7 @@ const run = async () => {
         const userCollection = db.collection('allData')
         const companyCollection = db.collection('companies')
         const jobsCollection = db.collection('jobs')
+        const applicationsCollection = db.collection('applications')
 
         app.get('/user', async (req,res) => {
             const result = await userCollection.find().toArray()
@@ -66,6 +67,18 @@ const run = async () => {
                 createAt: new Date()
             }
             const result = await companyCollection.insertOne(newCompany)
+            res.send(result)
+        })
+
+        //aplications
+
+        app.get('/api/applications', async(req,res) => {
+            const n = req.body
+            const newApplication = {
+                ...n,
+                createdAt: new Date()
+            }
+            const result = await applicationsCollection.insertOne(newApplication)
             res.send(result)
         })
 
