@@ -7,17 +7,18 @@ const JobApply = ({ job, user }) => {
   const [coverLetter, setCoverLetter] = useState("");
   const [resumeLink, setResumeLink] = useState("");
   const [portfolioLink, setPortfolioLink] = useState("");
-  console.log(job)
+  console.log(user)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const applicationData = {
-      jobId: job?._id,
+      jobId: job?.companyId,
       jobTitle: job?.jobTitle,
       companyName: job?.companyName,
       applicantName: user?.name,
       applicantEmail: user?.email,
+      applicantId: user?.id,
       portfolioLink,
       resumeLink,
       coverLetter,

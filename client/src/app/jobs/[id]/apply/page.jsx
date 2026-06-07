@@ -15,7 +15,7 @@ const page = async ({params}) => {
         headers: await headers()
     })
     const user = session?.user
-    console.log(job)
+    console.log(user)
     if(!user){
         redirect(`/signin?redirect=jobs/${id}/apply`)
     }
@@ -27,7 +27,7 @@ const page = async ({params}) => {
         )
     }
 
-    const applicants = await getApplicantsId(job?._id)
+    const applicants = await getApplicantsId(user?.id)
     console.log(applicants)
 
     return (
