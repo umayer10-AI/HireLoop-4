@@ -2,11 +2,16 @@
 import { authClient } from "@/lib/auth-client";
 // import { Chrome } from "lucide-react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 
 const SignInPage = () => {
+
+  const searchParams = useSearchParams()
+  const redirectTo = searchParams.get('redirect') || '/'
+  const router = useRouter()
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -17,7 +22,7 @@ const SignInPage = () => {
             email: v.email,
             password: v.password,
             rememberMe: true,
-            callbackURL: "/",
+            // callbackURL: "/",
         });
 
         if(data){
@@ -30,6 +35,7 @@ const SignInPage = () => {
                 },
               }
             );
+            router.push(redirectTo)
         }
         if(error){
             toast(`${error.message}`,
