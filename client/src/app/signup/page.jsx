@@ -25,12 +25,15 @@ const SignUpPage = () => {
         console.log(v)
         console.log(r)
 
+        const plan = r ==='seeker' ? 'seeker_free':'recruiter_free'
+
         const { data, error } = await authClient.signUp.email({
             name: v.name,
             email: v.email,
             password: v.password,
             image: v.image,
             role: r,
+            plan,
         });
 
         if(data){
