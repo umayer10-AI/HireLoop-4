@@ -6,6 +6,7 @@ import { Check, ChevronDown } from "lucide-react";
 const seekerPlans = [
 {
 name: "Free",
+id: 'seeker_free',
 price: "$0",
 period: "/forever",
 features: [
@@ -17,6 +18,7 @@ features: [
 },
 {
 name: "Pro",
+id: 'seeker_pro',
 price: "$19",
 period: "/month",
 popular: true,
@@ -29,6 +31,7 @@ features: [
 },
 {
 name: "Premium",
+id: 'seeker_premium',
 price: "$39",
 period: "/month",
 features: [
@@ -43,6 +46,7 @@ features: [
 const recruiterPlans = [
 {
 name: "Free",
+id: 'recruiter_free',
 price: "$0",
 period: "/forever",
 features: [
@@ -54,6 +58,7 @@ features: [
 },
 {
 name: "Growth",
+id: 'recruiter_grow',
 price: "$49",
 period: "/month",
 popular: true,
@@ -66,6 +71,7 @@ features: [
 },
 {
 name: "Enterprise",
+id: 'recruiter_enter',
 price: "$149",
 period: "/month",
 features: [
@@ -113,7 +119,6 @@ Simple, Transparent Pricing </h1> <p className="text-gray-400 max-w-2xl mx-auto"
 Choose the perfect plan whether you are searching for your dream job
 or hiring top talent. </p> </div>
 
-```
     <div className="flex justify-center mb-12">
       <div className="bg-gray-900 border border-gray-800 rounded-xl p-1 flex">
         <button
@@ -173,6 +178,7 @@ or hiring top talent. </p> </div>
           </ul>
 
           <form action="/api/checkout_sessions" method="POST">
+          <input type="hidden" name="plan_id" value={plan.id} />
       <section>
         <button type="submit" role="link" className="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-600 transition font-semibold">
           Choose Plan
