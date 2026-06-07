@@ -128,7 +128,7 @@ const SignInPage = () => {
         <p className="text-center text-gray-400 text-sm mt-6">
           Don&apos;t have an account?{" "}
           <Link
-            href="/signup"
+            href={`/signup?redirect=${redirectTo}`}
             className="text-purple-400 font-semibold hover:text-purple-300"
           >
             Sign Up

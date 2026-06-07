@@ -2,6 +2,7 @@
 import { authClient } from "@/lib/auth-client";
 import { Description, Label, Radio, RadioGroup } from "@heroui/react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -10,6 +11,10 @@ import { FcGoogle } from "react-icons/fc";
 const SignUpPage = () => {
 
   const [r, setR] = useState('seeker')
+
+    const searchParams = useSearchParams()
+    const redirectTo = searchParams.get('redirect') || '/'
+    const router = useRouter()
 
     const { register, handleSubmit, formState: { errors } } = useForm({
   defaultValues: {
@@ -26,7 +31,6 @@ const SignUpPage = () => {
             password: v.password,
             image: v.image,
             role: r,
-            callbackURL: "/",
         });
 
         if(data){
@@ -39,6 +43,7 @@ const SignUpPage = () => {
                 },
               }
             );
+            router.push(redirectTo)
         }
         if(error){
             toast(`${error.message}`,
@@ -177,7 +182,7 @@ const SignUpPage = () => {
         <p className="text-center text-gray-400 text-sm mt-6">
           Already have an account?{" "}
           <Link
-            href="/signin"
+            href={`/signin?redirect=${redirectTo}`}
             className="text-purple-400 font-semibold hover:text-purple-300"
           >
             Sign In
