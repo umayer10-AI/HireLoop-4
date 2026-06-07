@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 const JobDetailsPage = ({job}) => {
+  console.log(job)
     return (
         <div>
             <div className="min-h-screen bg-gray-950 text-white p-6 md:p-12 font-sans flex justify-center items-start">
@@ -138,14 +139,13 @@ const JobDetailsPage = ({job}) => {
             </div>
 
             {/* Submission External Trigger Action Button */}
-            <a
-              href={job.applyLink || '#'}
-              target="_blank"
+            <Link
+              href={`/jobs/${job._id}/apply`}
               rel="noopener noreferrer"
               className="w-full bg-neutral-100 hover:bg-white text-gray-950 font-semibold text-center text-sm py-3.5 px-4 rounded-xl block transition-all shadow-lg hover:shadow-xl hover:scale-[1.01] active:scale-[0.99]"
             >
               Submit Application
-            </a>
+            </Link>
           </div>
 
         </div>
