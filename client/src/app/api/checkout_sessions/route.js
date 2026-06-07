@@ -23,7 +23,7 @@ export async function POST(v) {
         {
           // Provide the exact Price ID (for example, price_1234) of the product you want to sell
           price: priceId,
-          metadata: {planId},
+        //   metadata: {planId},
           quantity: 1,
         },
       ],
