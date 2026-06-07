@@ -4,6 +4,7 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import React from 'react';
 import JobApply from './JobApply';
+import { getApplicantsId } from '@/lib/api/applicants';
 
 const page = async ({params}) => {
 
@@ -14,7 +15,7 @@ const page = async ({params}) => {
         headers: await headers()
     })
     const user = session?.user
-    console.log(user)
+    console.log(job)
     if(!user){
         redirect(`/signin?redirect=jobs/${id}/apply`)
     }
@@ -26,9 +27,12 @@ const page = async ({params}) => {
         )
     }
 
+    const applicants = await getApplicantsId(job?._id)
+    console.log(applicants)
+
     return (
         <div>
-            apply
+            <h2>{applicants.length}</h2>
             <JobApply user={user} job={job}></JobApply>
         </div>
     );

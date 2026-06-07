@@ -1,26 +1,32 @@
 "use client";
 
+import { submitApplication } from "@/lib/api/companies";
 import React, { useState } from "react";
 
 const JobApply = ({ job, user }) => {
   const [coverLetter, setCoverLetter] = useState("");
+  const [resumeLink, setResumeLink] = useState("");
+  const [portfolioLink, setPortfolioLink] = useState("");
+  console.log(job)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const applicationData = {
       jobId: job?._id,
-      jobTitle: job?.title,
+      jobTitle: job?.jobTitle,
+      companyName: job?.companyName,
       applicantName: user?.name,
       applicantEmail: user?.email,
-      applicantPhone: user?.phone,
+      portfolioLink,
+      resumeLink,
       coverLetter,
       appliedAt: new Date(),
     };
 
     console.log(applicationData);
 
-    // API call here
+    await submitApplication(applicationData)
   };
 
   return (
@@ -48,40 +54,31 @@ const JobApply = ({ job, user }) => {
             />
           </div>
 
-          {/* Email */}
+          {/* Portfolio Link */}
           <div>
             <label className="block text-sm text-gray-300 mb-2">
-              Email Address
+              Portfolio Link (GitHub / Website / Behance)
             </label>
             <input
-              type="email"
-              value={user?.email || ""}
-              readOnly
+              type="url"
+              value={portfolioLink}
+              onChange={(e) => setPortfolioLink(e.target.value)}
+              placeholder="https://your-portfolio.com"
               className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white"
             />
           </div>
 
-          {/* Phone */}
+          {/* Resume Link */}
           <div>
             <label className="block text-sm text-gray-300 mb-2">
-              Phone Number
+              Resume Link (Google Drive / URL)
             </label>
             <input
-              type="text"
-              defaultValue={user?.phone || ""}
+              type="url"
+              value={resumeLink}
+              onChange={(e) => setResumeLink(e.target.value)}
+              placeholder="https://drive.google.com/..."
               className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white"
-            />
-          </div>
-
-          {/* Resume */}
-          <div>
-            <label className="block text-sm text-gray-300 mb-2">
-              Resume / CV
-            </label>
-            <input
-              type="file"
-              accept=".pdf,.doc,.docx"
-              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-gray-300"
             />
           </div>
 
@@ -97,33 +94,6 @@ const JobApply = ({ job, user }) => {
               placeholder="Write why you are a good fit for this role..."
               className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white resize-none"
             />
-          </div>
-
-          {/* Job Info */}
-          <div className="bg-gray-800 rounded-xl p-4 border border-gray-700">
-            <h3 className="text-lg font-semibold text-white mb-2">
-              Job Details
-            </h3>
-
-            <div className="space-y-1 text-gray-300">
-              <p>
-                <span className="font-medium">Position:</span> {job?.title}
-              </p>
-
-              <p>
-                <span className="font-medium">Company:</span>{" "}
-                {job?.companyName}
-              </p>
-
-              <p>
-                <span className="font-medium">Location:</span>{" "}
-                {job?.location}
-              </p>
-
-              <p>
-                <span className="font-medium">Type:</span> {job?.jobType}
-              </p>
-            </div>
           </div>
 
           <button

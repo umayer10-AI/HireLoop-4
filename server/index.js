@@ -43,9 +43,26 @@ const run = async () => {
             if(req.query.status){
                 query.status = req.query.status
             }
-            console.log(query.companyId,query.status)
+            // console.log(query.companyId,query.status)
             const result = await userCollection.find(query).toArray()
             res.send(result)
+        })
+
+        app.get('/api/applications', async (req,res) => {
+            const query = {}
+            // if(req.query.jobId){
+            //     query.jobId = req.query.jobId
+            // }
+            // if(req.query.applicantId){
+            //     query.applicantId = req.query.applicantId
+            // }
+            if(req.query.applicantId){
+                query.jobId = req.query.applicantId
+            }
+            console.log(query.jobId,query.applicantId)
+            const result = await applicationsCollection.find(query).toArray()
+            res.send(result)
+            console.log(result)
         })
 
         app.post('/user', async (req,res) => {
@@ -72,7 +89,7 @@ const run = async () => {
 
         //aplications
 
-        app.get('/api/applications', async(req,res) => {
+        app.post('/api/applications', async(req,res) => {
             const n = req.body
             const newApplication = {
                 ...n,
