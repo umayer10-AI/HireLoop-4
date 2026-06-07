@@ -29,6 +29,7 @@ const run = async () => {
         const companyCollection = db.collection('companies')
         const jobsCollection = db.collection('jobs')
         const applicationsCollection = db.collection('applications')
+        const subscriptionCollection = db.collection('subscription')
 
         app.get('/user', async (req,res) => {
             const result = await userCollection.find().toArray()
@@ -97,6 +98,16 @@ const run = async () => {
                 createdAt: new Date()
             }
             const result = await applicationsCollection.insertOne(newApplication)
+            res.send(result)
+        })
+
+        app.post('/api/subscriptions', async (req,res) => {
+            const newUser = req.body
+            const subsInfo = {
+                ...newUser,
+                createdAt: new Date()
+            }
+            const result = await userCollection.insertOne(subsInfo)
             res.send(result)
         })
 

@@ -22,6 +22,12 @@ return redirect("/");
 }
 
 if (status === "complete") {
+
+    const subsInfo = {
+        email: customerEmail,
+        planId: metadata.planId
+    }
+
 return ( <div className="min-h-screen bg-black flex items-center justify-center px-4"> <div className="max-w-xl w-full"> <div className="bg-gray-900 border border-gray-800 rounded-3xl p-10 text-center shadow-2xl"> <div className="flex justify-center mb-6"> <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center"> <CheckCircle className="w-12 h-12 text-green-400" /> </div> </div>
 
         <h1 className="text-4xl font-bold text-white mb-4">
