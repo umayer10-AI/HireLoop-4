@@ -28,7 +28,7 @@ const Navbar = () => {
     },
     {
       name: "Pricing",
-      path: "/pricing",
+      path: "/plans",
     },
   ];
 

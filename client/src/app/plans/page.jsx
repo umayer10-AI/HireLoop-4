@@ -110,7 +110,7 @@ const plans = tab === "seekers" ? seekerPlans : recruiterPlans;
 
 return ( <div className="min-h-screen bg-black text-white px-6 py-20"> <div className="max-w-7xl mx-auto"> <div className="text-center mb-14"> <h1 className="text-5xl font-bold mb-4">
 Simple, Transparent Pricing </h1> <p className="text-gray-400 max-w-2xl mx-auto">
-Choose the perfect plan whether you're searching for your dream job
+Choose the perfect plan whether you are searching for your dream job
 or hiring top talent. </p> </div>
 
 ```
@@ -172,9 +172,14 @@ or hiring top talent. </p> </div>
             ))}
           </ul>
 
-          <button className="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-600 transition font-semibold">
-            Choose Plan
-          </button>
+          <form action="/api/checkout_sessions" method="POST">
+      <section>
+        <button type="submit" role="link" className="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-600 transition font-semibold">
+          Choose Plan
+        </button>
+      </section>
+    </form>
+
         </div>
       ))}
     </div>
